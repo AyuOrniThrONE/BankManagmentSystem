@@ -1,20 +1,23 @@
 package bank.managment.system;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import com.toedter.calendar.JDateChooser;
-public class SignUpOne extends JFrame{
+
+public class SignUpOne extends JFrame implements ActionListener{
 	
 	JTextField nameTextField,fnameTextField,emailTextField,addressTextField,cityTextField,stateTextField,pinTextField;
 	JDateChooser dateChooser;
 	JRadioButton male,female,married,unmarried,other;
 	JButton next;
+	long random;
 	
 	SignUpOne(){
 		setLayout(null);
 		Random ran=new Random();
-		long random=Math.abs((ran.nextLong()%9000L)+1000L);
+		random=Math.abs((ran.nextLong()%9000L)+1000L);
 		
 		JLabel formno=new JLabel("APPLICATION FORM NO. "+ random);
 		formno.setFont(new Font("Raleway",Font.BOLD,38));
@@ -155,6 +158,7 @@ public class SignUpOne extends JFrame{
 		next.setForeground(Color.white);
 		next.setFont(new Font("Raleway",Font.BOLD,14));
 		next.setBounds(620,660,80,30);
+		next.addActionListener(this);
 		add(next);
 		
 		getContentPane().setBackground(Color.white);
@@ -163,9 +167,51 @@ public class SignUpOne extends JFrame{
 		setLocation(350,10);
 		setVisible(true);
 	}
+	public void actionPerformed(ActionEvent ae) {
+		String formno=""+random;
+		String name=nameTextField.getText();
+		String fname=fnameTextField.getText();
+		String dob=((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+		String gender=null;
+		if(male.isSelected()) {
+			gender="Male";
+		}else if(female.isSelected()) {
+			gender="Female";
+		}
+		String email=emailTextField.getText();
+		String marital=null;
+		if(married.isSelected()) {
+			marital="Married";
+		}else if(unmarried.isSelected()) {
+			marital="Unmarried";
+		}else if(other.isSelected()) {
+			marital="Other";
+		}
+		String address=addressTextField.getText();
+		String city=cityTextField.getText();
+		String state=stateTextField.getText();
+		String pin=pinTextField.getText();
+
+		try {
+			if(name.equals("")) {
+				JOptionPane.showMessageDialog(null, "Name is Required");
+			} else {
+				Conn c=new Conn();
+				String query="insert into signup values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+state+"','"+pin+"')";
+				c.s.executeUpdate(query);
+				
+				setVisible(false);
+				new SignUpTwo(formno).setVisible(true);
+			}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new SignUpOne();
 	}
+	
+	
 
 }
