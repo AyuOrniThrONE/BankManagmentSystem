@@ -135,8 +135,8 @@ public class SignUpTwo extends JFrame implements ActionListener{
 		add(eno);
 		
 		ButtonGroup eGroup=new ButtonGroup();
-		sGroup.add(eyes);
-		sGroup.add(eno);
+		eGroup.add(eyes);
+		eGroup.add(eno);
 		
 		next=new JButton("Next");
 		next.setBackground(Color.black);
@@ -181,6 +181,8 @@ public class SignUpTwo extends JFrame implements ActionListener{
 				c.s.executeUpdate(query);
 				
 				//signup3 object
+				setVisible(false);
+				new SignupThree(formno).setVisible(true);
 			}
 		}catch(Exception e) {
 			System.out.println(e);
