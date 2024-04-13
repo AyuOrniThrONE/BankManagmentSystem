@@ -37,7 +37,7 @@ This is a Bank Management System application developed purely in Java with the S
 Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue on GitHub or submit a pull request.
 
 ## Reference
-This project is a reference by YouTube Playlist - see the the link for Channel(YouTube).
+This project is a reference by YouTube Playlist - see the the link for Channel <a href="https://youtube.com/playlist?list=PL_6klLfS1WqG8mRCW5a-bIViq1DbzQkp9&si=Zi-tx7ysyEkkCwyv">(YouTube).
 
 ## Contact
 For any inquiries or support, feel free to contact the project maintainer:
